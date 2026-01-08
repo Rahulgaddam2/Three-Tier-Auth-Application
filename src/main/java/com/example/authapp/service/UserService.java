@@ -15,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // SIGNUP
+
     public User register(String username, String password) {
         Optional<User> existingUser = userRepository.findByUsername(username);
 
@@ -25,12 +25,12 @@ public class UserService {
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password); // plain for now (we’ll hash later)
+        user.setPassword(password); 
 
         return userRepository.save(user);
     }
 
-    // LOGIN
+
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
