@@ -1,0 +1,24 @@
+<h2>Sign Up</h2>
+
+<input
+  type="text"
+  placeholder="Username"
+  [(ngModel)]="username"
+/>
+
+<br /><br />
+
+<input
+  type="password"
+  placeholder="Password"
+  [(ngModel)]="password"
+/>
+
+<br /><br />
+
+<button (click)="signup()">Sign Up</button>
+
+<p style="color: green" *ngIf="message">{{ message }}</p>
+<p style="color: red" *ngIf="error">{{ error }}</p>
+
+<p>Already have an account? <a routerLink="/">Login</a></p>

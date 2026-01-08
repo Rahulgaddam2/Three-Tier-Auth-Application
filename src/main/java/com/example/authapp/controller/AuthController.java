@@ -4,8 +4,11 @@ import com.example.authapp.dto.LoginRequest;
 import com.example.authapp.dto.SignupRequest;
 import com.example.authapp.entity.User;
 import com.example.authapp.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -18,23 +21,25 @@ public class AuthController {
         this.userService = userService;
     }
 
-
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
-        User user = userService.register(
+    public ResponseEntity<Map<String, String>> signup(
+            @RequestBody SignupRequest request
+    ) {
+        userService.register(
                 request.getUsername(),
                 request.getPassword()
         );
-        return ResponseEntity.ok("User registered successfully");
-    }
 
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(Map.of("message", "User registered successfully"));
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        User user = userService.login(
-                request.getUsername(),
-                request.getPassword()
+        userService.login(request.getUsername(), request.getPassword());
+        return ResponseEntity.ok(
+                Map.of("message", "Login successful")
         );
-        return ResponseEntity.ok("Login successful");
     }
 }

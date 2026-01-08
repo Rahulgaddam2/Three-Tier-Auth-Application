@@ -1,0 +1,22 @@
+<h2>Login</h2>
+
+<input
+  type="text"
+  placeholder="Username"
+  [(ngModel)]="username"
+/><br /><br />
+
+<input
+  type="password"
+  placeholder="Password"
+  [(ngModel)]="password"
+/><br /><br />
+
+<button (click)="login()">Login</button>
+
+<p style="color: red" *ngIf="error">{{ error }}</p>
+
+<p>
+  New user?
+  <a routerLink="/signup">Create an account</a>
+</p>
